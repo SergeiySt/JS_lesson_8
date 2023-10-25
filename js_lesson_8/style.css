@@ -37,3 +37,18 @@ button#hint {
 button#hint:disabled {
     background-color: gray;
 }
+
+.rounded-box {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.centered-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin-top: 20px;
+}

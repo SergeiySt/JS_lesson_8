@@ -3,12 +3,46 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 
 <body>
+    <h1>Тренажер таблицы умножения</h1>
+    <div class="options">
+        <label for="select-number">Выберите число:</label>
+        <select id="select-number">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        <button id="start-quiz">Начать тест</button>
+        <button id="restart-quiz">Начать сначала</button>
+    </div>
+    <div class="quiz">
+        <p id="question"></p>
+        <input type="number" id="user-answer" placeholder="Ваш ответ">
+        <button id="check-answer">Проверить</button>
+        <button id="hint">Подсказка</button>
+    </div>
+    <div class="score">
+        <p>Правильные ответы: <span id="correct-answers">0</span></p>
+        <p>Ошибки: <span id="wrong-answers">0</span></p>
+        <p>Подсказки: <span id="hints-used">0</span></p>
+    </div>
 
+    <script src=" script.js"></script>
 </body>
 
 </html>

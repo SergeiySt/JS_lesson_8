@@ -1,8 +1,9 @@
 
 document.addEventListener("DOMContentLoaded", function () {
+    const multiplicationType = document.getElementById("multiplication-type");
     const selectNumber = document.getElementById("select-number");
     const startButton = document.getElementById("start-quiz");
-    const restartButton = document.getElementById("restart-quiz"); // Добавили кнопку "Начать сначала"
+    const restartButton = document.getElementById("restart-quiz");
     const questionText = document.getElementById("question");
     const userAnswer = document.getElementById("user-answer");
     const checkAnswerButton = document.getElementById("check-answer");
@@ -11,16 +12,46 @@ document.addEventListener("DOMContentLoaded", function () {
     const wrongAnswers = document.getElementById("wrong-answers");
     const hintsUsed = document.getElementById("hints-used");
 
-    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // Массив чисел
-    let firstNumber, secondNumber; // Умножаемые числа
+    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let firstNumber, secondNumber;
     let correctCount = 0;
     let wrongCount = 0;
     let hintCount = 0;
 
+    multiplicationType.addEventListener("change", function () {
+        const type = multiplicationType.value;
+        selectNumber.innerHTML = ""; // Очищаем список чисел
+        if (type === "single") {
+            // Заполняем список чисел для умножения на конкретное число
+            for (let i = 1; i <= 10; i++) {
+                const option = document.createElement("option");
+                option.value = i;
+                option.text = i;
+                selectNumber.appendChild(option);
+            }
+        } else if (type === "all") {
+            // Заполняем список чисел для умножения на все числа до
+            for (let i = 1; i <= 10; i++) {
+                const option = document.createElement("option");
+                option.value = `1-${i}`;
+                option.text = `1-${i}`;
+                selectNumber.appendChild(option);
+            }
+        }
+    });
+
     function generateQuestion() {
-        const selectedNumber = Number(selectNumber.value); // Выбранное число
-        firstNumber = selectedNumber; // Обновляем первое число
-        secondNumber = numbers[Math.floor(Math.random() * numbers.length)]; // Генерируем второе число
+        const selectedNumber = selectNumber.value;
+        if (multiplicationType.value === "all") {
+            const range = selectedNumber.split("-");
+            const start = Number(range[0]);
+            const end = Number(range[1]);
+            firstNumber = Math.floor(Math.random() * (end - start + 1)) + start;
+        } else {
+            firstNumber = Number(selectedNumber);
+        }
+
+        secondNumber = numbers[Math.floor(Math.random() * numbers.length)];
 
         const question = `Сколько будет ${firstNumber} * ${secondNumber}?`;
         questionText.textContent = question;
@@ -35,11 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
         updateScore();
         generateQuestion();
         startButton.disabled = true;
-        restartButton.disabled = false; // Разблокируем кнопку "Начать сначала"
+        restartButton.disabled = false;
     });
 
     restartButton.addEventListener("click", function () {
-        // Очищаем счет и вопрос
         correctCount = 0;
         wrongCount = 0;
         hintCount = 0;
@@ -53,11 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
     checkAnswerButton.addEventListener("click", function () {
         const answer = Number(userAnswer.value);
         const correctAnswer = firstNumber * secondNumber;
-
-        if (selectNumber.selectedIndex < 0 || selectNumber.selectedIndex >= numbers.length) {
-            alert("Выберите число!");
-            return;
-        }
 
         if (!isNaN(answer)) {
             if (answer === correctAnswer) {
@@ -85,5 +110,12 @@ document.addEventListener("DOMContentLoaded", function () {
         correctAnswers.textContent = correctCount;
         wrongAnswers.textContent = wrongCount;
         hintsUsed.textContent = hintCount;
+    }
+
+    for (let i = 1; i <= 10; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.text = i;
+        selectNumber.appendChild(option);
     }
 });

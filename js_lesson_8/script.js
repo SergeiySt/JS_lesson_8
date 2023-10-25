@@ -12,17 +12,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const wrongAnswers = document.getElementById("wrong-answers");
     const hintsUsed = document.getElementById("hints-used");
 
+    //  const correct_answer_1 = document.getElementById("correct-answer-1");
+    // const wrong_answers_1 = document.getElementById("wrong_answers_1");
+    //  const hints_used_1 = document.getElementById("wrong_answers_1");
+
     let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let firstNumber, secondNumber;
     let correctCount = 0;
     let wrongCount = 0;
     let hintCount = 0;
 
+    selectNumber.innerHTML = "";
+
+    restartButton.disabled = true;
+    checkAnswerButton.disabled = true;
+    hintButton.disabled = true;
+    userAnswer.disabled = true;
+
+
     multiplicationType.addEventListener("change", function () {
         const type = multiplicationType.value;
-        selectNumber.innerHTML = ""; // Очищаем список чисел
+        selectNumber.innerHTML = "";
         if (type === "single") {
-            // Заполняем список чисел для умножения на конкретное число
+
             for (let i = 1; i <= 10; i++) {
                 const option = document.createElement("option");
                 option.value = i;
@@ -30,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectNumber.appendChild(option);
             }
         } else if (type === "all") {
-            // Заполняем список чисел для умножения на все числа до
+
             for (let i = 1; i <= 10; i++) {
                 const option = document.createElement("option");
                 option.value = `1-${i}`;
@@ -53,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         secondNumber = numbers[Math.floor(Math.random() * numbers.length)];
 
-        const question = `Сколько будет ${firstNumber} * ${secondNumber}?`;
+        const question = `Скільки буде: ${firstNumber} * ${secondNumber}?`;
         questionText.textContent = question;
         userAnswer.value = "";
         userAnswer.focus();
@@ -67,9 +79,15 @@ document.addEventListener("DOMContentLoaded", function () {
         generateQuestion();
         startButton.disabled = true;
         restartButton.disabled = false;
+        checkAnswerButton.disabled = false;
+        hintButton.disabled = false;
+        userAnswer.disabled = false;
+
     });
 
     restartButton.addEventListener("click", function () {
+        $("#error-message1").html("");
+        $("#error-message2").html("");
         correctCount = 0;
         wrongCount = 0;
         hintCount = 0;
@@ -78,20 +96,26 @@ document.addEventListener("DOMContentLoaded", function () {
         userAnswer.value = "";
         startButton.disabled = false;
         restartButton.disabled = true;
+
+        checkAnswerButton.disabled = true;
+        hintButton.disabled = true;
+        userAnswer.disabled = true;
     });
 
     checkAnswerButton.addEventListener("click", function () {
+        $("#error-message1").html("");
+        $("#error-message2").html("");
         const answer = Number(userAnswer.value);
         const correctAnswer = firstNumber * secondNumber;
 
-        if (!isNaN(answer)) {
+        if (!isNaN(answer) && userAnswer.value.trim() !== "") {
             if (answer === correctAnswer) {
                 correctCount++;
             } else {
                 wrongCount++;
             }
         } else {
-            alert("Введите число!");
+            $("#error-message2").html("Введіть число!");
             return;
         }
 
@@ -100,10 +124,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     hintButton.addEventListener("click", function () {
+        $("#error-message2").html("");
         const correctAnswer = firstNumber * secondNumber;
         hintCount++;
         updateScore();
-        alert(`Правильный ответ: ${correctAnswer}`);
+        $("#error-message1").html("Правильна відповідь: " + correctAnswer);
     });
 
     function updateScore() {

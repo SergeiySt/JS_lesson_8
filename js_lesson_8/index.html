@@ -12,42 +12,63 @@
 </head>
 
 <body>
-    <h1>Тренажер таблицы умножения</h1>
-    <div class="options">
-        <label for="select-number">Выберите способ умножения:</label>
-        <select id="multiplication-type">
-            <option value="single">Умножение на конкретное число</option>
-            <option value="all">Умножение на все числа до</option>
-        </select>
-        <!-- <label for="select-number">Выберите число:</label> -->
-        <select id="select-number">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        <button id="start-quiz">Начать тест</button>
-        <button id="restart-quiz">Начать сначала</button>
-    </div>
-    <div class="quiz">
-        <p id="question"></p>
-        <input type="number" id="user-answer" placeholder="Ваш ответ">
-        <button id="check-answer">Проверить</button>
-        <button id="hint">Подсказка</button>
-    </div>
-    <div class="score">
-        <p>Правильные ответы: <span id="correct-answers">0</span></p>
-        <p>Ошибки: <span id="wrong-answers">0</span></p>
-        <p>Подсказки: <span id="hints-used">0</span></p>
+    <div class="container-fluid">
+        <div class="col-md-6 quiz rounded-box mx-auto">
+            <h1 class="mt-3 text-center">Тренажер таблиці множення</h1>
+            <div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 options">
+                        <label for="select-number">Виберіть спосіб множення:</label>
+                        <select id="multiplication-type" class="form-control" style="margin-bottom: 10px;">
+                            <option value="single">множення на конкретне число</option>
+                            <option value="all">множення на всі числа до</option>
+                        </select>
+                        <label for="select-number">Виберіть діапазон числа</label>
+                        <select id="select-number" class="form-control" style="margin-bottom: 10px;">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <button id="start-quiz" class="btn btn-primary mt-2">Почати тест</button>
+                        <button id="restart-quiz" class="btn btn-secondary mt-2">Почати спочатку</button>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-md-6 quiz">
+
+                        <p id="question" style="font-size: 25px;"></p>
+                        <div class="form-group">
+                            <input type="number" id="user-answer" class="form-control" placeholder="Ваша відповідь"
+                                style="width: 408px;">
+                            <span id="error-message1" style="color: blue; font-size: 16px;"></span>
+                            <span id="error-message2" style="color: red; font-size: 16px;"></span>
+                        </div>
+
+                        <button id="check-answer" class="btn btn-success mt-2">Перевірити</button>
+                        <button id="hint" class="btn btn-warning mt-2">Підказати</button>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-md-6 score">
+                        <p id="correct-answer-1" style="color: green;">Правильні відповіді: <span
+                                id="correct-answers">0</span></p>
+                        <p id="wrong-answers-1" style="color: red;">Неправильні відповіді: <span
+                                id="wrong-answers">0</span></p>
+                        <p id="hints-used-1" style="color: blue;">Підказки: <span id="hints-used">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src=" script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
